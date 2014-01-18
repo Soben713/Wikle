@@ -10,15 +10,22 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import edu.sharif.ce.fall92.mir.pa3.wikle.crawler.Crawler;
+import edu.sharif.ce.fall92.mir.pa3.wikle.indexer.Indexer;
+import edu.sharif.ce.fall92.mir.pa3.wikle.searcher.Searcher;
+import edu.sharif.ce.fall92.mir.pa3.wikle.utils.DocsCollection;
+
 
 
 public class UI extends JFrame implements ActionListener{
-	JButton crawl;
-	JButton loadCrawled;
-	JButton index;
-	JButton loadIndexed;
-	JButton search;
-	JTextField searchField;
+	final JButton crawl;
+	final JButton loadCrawled;
+	final JButton index;
+	final JButton loadIndexed;
+	final JButton search;
+	final JTextField searchField;
+	DocsCollection DC;
+	Indexer indexer = new Indexer();
 	public UI() {
     	Container con=this.getContentPane();
     	setTitle("Search engine");
@@ -53,6 +60,7 @@ public class UI extends JFrame implements ActionListener{
         index.setPreferredSize(new Dimension(180,70));
         index.addActionListener(this);
         indexPanel.add(index);
+        index.setEnabled(false);
         
         loadIndexed = new JButton("Load indexed data");
         loadIndexed.setPreferredSize(new Dimension(180,70));
@@ -78,6 +86,7 @@ public class UI extends JFrame implements ActionListener{
         search.setPreferredSize(new Dimension(100,50));
         search.addActionListener(this);
         searchPanel.add(search);
+        search.setEnabled(false);
         
         setVisible(true);
     }
@@ -111,27 +120,32 @@ public class UI extends JFrame implements ActionListener{
 
 	private void loadIndexed() {
 		// TODO Auto-generated method stub
-		
+		search.setEnabled(true);
 	}
 
 	private void search() {
 		String txt=searchField.getText();
-		JOptionPane.showMessageDialog(this, txt);
+		Searcher.search(txt);
 	}
 
 	private void startIndex() {
-		// TODO Auto-generated method stub
+		indexer.updateIndex(DC);
+		search.setEnabled(true);
 		
 	}
 
 	private void loadCrawled() {
-		// TODO Auto-generated method stub
-		
+		DC = DocsCollection.load();
+		index.setEnabled(true);
 	}
 
 	private void startCrawl() {
-		JOptionPane.showMessageDialog(this, "Hello, World!!!!!");
+		Crawler crawler = new Crawler();
+		crawler.crawl();
+		DocsCollection.save(crawler.docsCollection);
+		DC = crawler.docsCollection;
 		
+		index.setEnabled(true);
 	}
 
 

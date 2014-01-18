@@ -18,14 +18,11 @@ import edu.sharif.ce.fall92.mir.pa3.wikle.utils.DocsCollection;
 
 
 public class UI extends JFrame implements ActionListener{
-	final JButton crawl;
-	final JButton loadCrawled;
-	final JButton index;
-	final JButton loadIndexed;
-	final JButton search;
+	final JButton crawl, loadCrawled, index, loadIndexed, search;
 	final JTextField searchField;
 	DocsCollection DC;
 	Indexer indexer = new Indexer();
+	
 	public UI() {
     	Container con=this.getContentPane();
     	setTitle("Search engine");
@@ -131,7 +128,6 @@ public class UI extends JFrame implements ActionListener{
 	private void startIndex() {
 		indexer.updateIndex(DC);
 		search.setEnabled(true);
-		
 	}
 
 	private void loadCrawled() {
@@ -143,7 +139,7 @@ public class UI extends JFrame implements ActionListener{
 		Crawler crawler = new Crawler();
 		crawler.crawl();
 		DocsCollection.save(crawler.docsCollection);
-		DC = crawler.docsCollection;
+		DC = DocsCollection.load();
 		
 		index.setEnabled(true);
 	}

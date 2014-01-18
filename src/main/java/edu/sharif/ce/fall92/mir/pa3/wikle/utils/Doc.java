@@ -1,6 +1,7 @@
 package edu.sharif.ce.fall92.mir.pa3.wikle.utils;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -56,9 +57,11 @@ public class Doc implements java.io.Serializable{
 	        for(DomElement element: links){
 	        	String elink = element.getAttribute("href"); 
 	        	String link = page.getFullyQualifiedUrl(elink).toString();
+	        	URL url = new URL(link);
 	        	Matcher m = Crawler.urlPattern.matcher(link);
-	        	if(m.find()){
-	        		validHrefs.add("http://" + m.group());
+	        	if(m.matches()){
+	        		String finalUrl = "http://" + url.getHost() + url.getPath();
+	        		validHrefs.add(finalUrl);
 	        	}
 	        }
 	        return validHrefs;

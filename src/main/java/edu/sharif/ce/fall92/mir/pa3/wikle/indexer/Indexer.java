@@ -19,7 +19,7 @@ import edu.sharif.ce.fall92.mir.pa3.wikle.utils.Serializer;
 
 public class Indexer {
 	public static FSDirectory indexDir;
-	public final static String docOrderPath = "docorderpath";
+	public final static String docOrderPath = "docOrderPath.ser";
 	public IndexWriter writer;
 
 	static {

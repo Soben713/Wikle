@@ -18,8 +18,8 @@ public class DocsCollection implements java.io.Serializable {
 	private static final long serialVersionUID = 110603940692915930L;
 	public Map<String, Doc> docs = new HashMap<String, Doc>();
 	public int fetchedDocs = 0;
-	final public static int MAX_DOCS = 10;
-	public final static String path = "docs";
+	final public static int MAX_DOCS = 5;
+	public final static String path = "docs.ser";
 	final float alpha = 0.1F;
 
 	/**
@@ -52,17 +52,6 @@ public class DocsCollection implements java.io.Serializable {
 			for(int j=0; j<docList.size(); j++)
 				mat[i][j] += alpha / docList.size();
 
-		// Now generate the linear equation
-		
-		double eq[][] = new double[docList.size()][docList.size()];
-		for(int i=0; i<docList.size(); i++){
-			for(int j=0; j<docList.size(); j++){
-				eq[i][j] = mat[j][i];
-				if(i==j)
-					eq[i][j]-= 1F;
-			}
-		}
-		
 		RealMatrix P = new Array2DRowRealMatrix(mat);
 		EigenDecomposition ed = new EigenDecomposition(P.transpose());
 		double d[] = ed.getRealEigenvalues();

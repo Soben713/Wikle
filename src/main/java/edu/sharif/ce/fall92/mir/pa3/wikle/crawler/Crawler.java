@@ -9,7 +9,8 @@ import edu.sharif.ce.fall92.mir.pa3.wikle.utils.Doc;
 import edu.sharif.ce.fall92.mir.pa3.wikle.utils.DocsCollection;
 
 public class Crawler{
-	public final static Pattern urlPattern = Pattern.compile("en\\.wikipedia\\.org/wiki/[()a-zA-Z0-9_-]*");
+	public final static Pattern urlPattern = 
+			Pattern.compile("(http://?)en\\.wikipedia\\.org/wiki/[()a-zA-Z0-9_#-]*");
 	final String[] seeds = {"http://en.wikipedia.org/wiki/The_Raven_That_Refused_to_Sing_(And_Other_Stories)",
 							"http://en.wikipedia.org/wiki/Information_retrieval"};
 	Queue<Doc> frontier = new ArrayDeque<Doc>();

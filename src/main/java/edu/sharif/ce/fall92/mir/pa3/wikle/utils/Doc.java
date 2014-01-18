@@ -1,18 +1,12 @@
 package edu.sharif.ce.fall92.mir.pa3.wikle.utils;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebClientOptions;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -24,12 +18,13 @@ public class Doc implements java.io.Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -7050526803205940857L;
-	public ArrayList<Doc> outLinks = new ArrayList<Doc>(),
-			inLinks = new ArrayList<Doc>();
+	public HashSet<Doc> outLinks = new HashSet<Doc>(),
+			inLinks = new HashSet<Doc>();
 	public float pageRank = 1F;
 	public String url, content;
 	public boolean fetched = false, inQueue = false;
 	DocsCollection docsCollection;
+	public int index = 0; // Used for pagerank matrics, will be assigned there
 
 	public Doc(String url, DocsCollection docsCollection) {
 		this.url = url;

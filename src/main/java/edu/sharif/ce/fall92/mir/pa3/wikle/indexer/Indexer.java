@@ -2,7 +2,6 @@ package edu.sharif.ce.fall92.mir.pa3.wikle.indexer;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.io.StringReader;
 import java.util.ArrayList;
 

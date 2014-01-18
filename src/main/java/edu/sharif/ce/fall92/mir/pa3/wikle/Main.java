@@ -13,7 +13,7 @@ import edu.sharif.ce.fall92.mir.pa3.wikle.utils.DocsCollection;
 public class Main {
 	public static void main(String[] args) {
 		DocsCollection dc;
-		/**
+		/**/
 		Crawler crawler = new Crawler();
 		crawler.crawl();
 		DocsCollection.save(crawler.docsCollection);

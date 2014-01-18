@@ -14,6 +14,7 @@ public class Crawler{
 							"http://en.wikipedia.org/wiki/Information_retrieval"};
 	Queue<Doc> frontier = new ArrayDeque<Doc>();
 	public DocsCollection docsCollection;
+	public static final boolean EXECUTE_JS = false;
 	
 	/**
 	 * Crawl the web and set webGraph
